@@ -55,6 +55,10 @@ public class Persona {
         this.gender = gender;
     }
 
+    /**
+     * Devuelve una cadena con todos los atributos separados por comas como en un CSV.
+     * @return
+     */
     @Override
     public String toString() {
         return firstName + "," + lastName + "," + email + "," + gender + "," + country;
@@ -65,6 +69,11 @@ public class Persona {
         return super.hashCode();
     }
 
+    /**
+     * Compara dos Personas por sus nombres y apellidos.
+     * @param obj   the reference object with which to compare.
+     * @return Si las dos Personas tienen nombres  y apellidos iguales.
+     */
     @Override
     public boolean equals(Object obj) {
 
