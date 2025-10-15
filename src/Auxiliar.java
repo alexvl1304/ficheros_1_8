@@ -33,7 +33,7 @@ public final class Auxiliar {
             return personas;
 
         }catch(FileNotFoundException e) {
-            System.out.println(e.getMessage());;
+            System.out.println(e.getMessage());
 
             return null;
         }
@@ -58,7 +58,7 @@ public final class Auxiliar {
             resultado = true;
 
         }catch(IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
 
         return resultado;

@@ -47,9 +47,9 @@ public class Personal {
     }
 
     /**
-     * Busca Personas que vivan en un determinado pais.
+     * Busca Personas que sean de un determinado pais.
      * @param pais
-     * @return una lista con todas las Personas que viven en el pais pasado por parametro
+     * @return una lista con todas las Personas del pais pasado por parametro
      */
     public ArrayList<Persona> personasPorPais(String pais) {
 
@@ -86,6 +86,11 @@ public class Personal {
         return borrado;
     }
 
+    /**
+     * Añade varias Personas a la lista desde un .CSV
+     * @param csv ruta del fichero .CSV
+     * @return si las Personas se añadieron con exito.
+     */
     public boolean anadirPersonasDesdeCSV(String csv) {
 
         ArrayList<Persona> lista = Auxiliar.readPersonasCSV(Path.of(csv));
