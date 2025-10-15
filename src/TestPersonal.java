@@ -63,10 +63,10 @@ boolean anadirPersonasAPersonal(Personal personal, String fichero) {
 
     if(fichero.endsWith(".csv")) {
 
-        return personal.anadirPersonasDesdeCSV(fichero);
+        return personal.anadirPersonasDesdeXML(fichero);
     }else if(fichero.endsWith(".xml")) {
 
-        return personal.anadirPersonasDesdeCSV(fichero);
+        return personal.anadirPersonasDesdeJSON(fichero);
     }else if(fichero.endsWith(".json")) {
 
         return personal.anadirPersonasDesdeCSV(fichero);

@@ -104,4 +104,42 @@ public class Personal {
 
         return true;
     }
+
+    /**
+     * Añade varias Personas a la lista desde un .XML
+     * @param xml ruta del fichero .XML
+     * @return si las Personas se añadieron con exito.
+     */
+    public boolean anadirPersonasDesdeXML(String xml) {
+
+        ArrayList<Persona> lista = Auxiliar.readPersonasXML(Path.of(xml));
+
+        if(lista == null) {return false;}
+
+        for (Persona persona : lista) {
+
+            listaPersonas.add(persona);
+        }
+
+        return true;
+    }
+
+    /**
+     * Añade varias Personas a la lista desde un .JSON
+     * @param json ruta del fichero .JSON
+     * @return si las Personas se añadieron con exito.
+     */
+    public boolean anadirPersonasDesdeJSON(String json) {
+
+        ArrayList<Persona> lista = Auxiliar.readPersonasJSON(Path.of(json));
+
+        if(lista == null) {return false;}
+
+        for (Persona persona : lista) {
+
+            listaPersonas.add(persona);
+        }
+
+        return true;
+    }
 }

@@ -63,4 +63,66 @@ public final class Auxiliar {
 
         return resultado;
     }
+
+    public static ArrayList<Persona> readPersonasXML(Path path){
+
+        ArrayList<Persona> personas = new ArrayList<>();
+
+        try(Scanner sc = new Scanner(new BufferedReader(new FileReader(path.toString())))) {
+
+            sc.nextLine();
+            String line = "";
+
+            while (sc.hasNextLine() && !(line = sc.nextLine()).isBlank() ) {
+
+                String[] elementos = line.split(",");
+
+                String firstName = elementos[0];
+                String lastName = elementos[1];
+                String email = elementos[2];
+                String gender = elementos[3];
+                String country = elementos[4];
+
+                personas.add(new Persona(firstName, lastName, email, gender, country));
+            }
+
+            return personas;
+
+        }catch(FileNotFoundException e) {
+            System.out.println(e.getMessage());
+
+            return null;
+        }
+    }
+
+    public static ArrayList<Persona> readPersonasJSON(Path path){
+
+        ArrayList<Persona> personas = new ArrayList<>();
+
+        try(Scanner sc = new Scanner(new BufferedReader(new FileReader(path.toString())))) {
+
+            sc.nextLine();
+            String line = "";
+
+            while (sc.hasNextLine() && !(line = sc.nextLine()).isBlank() ) {
+
+                String[] elementos = line.split(",");
+
+                String firstName = elementos[0];
+                String lastName = elementos[1];
+                String email = elementos[2];
+                String gender = elementos[3];
+                String country = elementos[4];
+
+                personas.add(new Persona(firstName, lastName, email, gender, country));
+            }
+
+            return personas;
+
+        }catch(FileNotFoundException e) {
+            System.out.println(e.getMessage());
+
+            return null;
+        }
+    }
 }
