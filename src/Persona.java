@@ -6,7 +6,7 @@ public class Persona {
     String country;
     String gender;
 
-    Persona(String firstName, String lastName, String email, String country, String gender) {
+    Persona(String firstName, String lastName, String email, String gender, String country) {
 
         this.firstName = firstName;
         this.lastName = lastName;
