@@ -64,7 +64,7 @@ public class Personal {
 
         ArrayList<Persona> lista = Auxiliar.readPersonasCSV(Path.of(csv));
 
-        if(listaPersonas == null) { return false; }
+        if(lista == null) return false;
 
         for (Persona persona : lista) {
 

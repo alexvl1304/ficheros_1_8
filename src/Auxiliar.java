@@ -1,8 +1,7 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Scanner;
 
 public final class Auxiliar {
@@ -38,5 +37,28 @@ public final class Auxiliar {
 
             return null;
         }
+    }
+
+    public boolean writeCSVPersonas(ArrayList<Persona> personas){
+
+        boolean resultado = false;
+        Date d = new Date();
+        String nombreFichero = "personal_" + d.getYear() + "-" + d.getMonth() + "-" + d.getDay() + "_" + d.getHours() + "-" + d.getMinutes() + "-" + d.getSeconds() + ".csv";
+
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(nombreFichero))){
+
+            bw.write("firstName,lastName,email,gender,country");
+
+            for (Persona persona : personas) {
+
+                bw.write(persona.toString());
+            }
+            resultado = true;
+
+        }catch(IOException e) {
+            e.printStackTrace();
+        }
+
+        return resultado;
     }
 }
