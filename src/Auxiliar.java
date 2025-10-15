@@ -33,25 +33,27 @@ public final class Auxiliar {
             return personas;
 
         }catch(FileNotFoundException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());;
 
             return null;
         }
     }
 
-    public boolean writeCSVPersonas(ArrayList<Persona> personas){
+    public static boolean writeCSVPersonas(ArrayList<Persona> personas){
 
         boolean resultado = false;
         Date d = new Date();
-        String nombreFichero = "personal_" + d.getYear() + "-" + d.getMonth() + "-" + d.getDay() + "_" + d.getHours() + "-" + d.getMinutes() + "-" + d.getSeconds() + ".csv";
+        String nombreFichero = "personal_" + (1900 + d.getYear()) + "-" + (1 + d.getMonth()) + "-" + d.getDate() + "_" + d.getHours() + "-" + d.getMinutes() + "-" + d.getSeconds() + ".csv";
 
         try(BufferedWriter bw = new BufferedWriter(new FileWriter(nombreFichero))){
 
             bw.write("firstName,lastName,email,gender,country");
+            bw.newLine();
 
             for (Persona persona : personas) {
 
                 bw.write(persona.toString());
+                bw.newLine();
             }
             resultado = true;
 

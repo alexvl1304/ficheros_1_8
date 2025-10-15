@@ -15,6 +15,29 @@ public class Personal {
     }
 
     /**
+     * Getter de una copia de la lista del personal.
+     * @return una copia de la lista de Personas
+     */
+    public ArrayList<Persona> getListaPersonas() {
+
+        ArrayList<Persona> copia = new ArrayList();
+
+        for (Persona p : listaPersonas) {
+            copia.add(p);
+        }
+
+        return copia;
+    }
+
+    /**
+     * Vacia por completo la lista del personal.
+     */
+    public void clear() {
+
+        listaPersonas.clear();
+    }
+
+    /**
      * Añade una Persona a la lista.
      * @param persona
      */
@@ -45,8 +68,9 @@ public class Personal {
     /**
      * Borra a una Persona de la lista por su email
      * @param email
+     * @return si se ha eliminado a alguna Persona de la lista.
      */
-    public void borrarPorEmail(String email) {
+    public boolean borrarPorEmail(String email) {
 
         boolean borrado = false;
 
@@ -58,13 +82,15 @@ public class Personal {
                 listaPersonas.remove(i);
             }
         }
+
+        return borrado;
     }
 
     public boolean anadirPersonasDesdeCSV(String csv) {
 
         ArrayList<Persona> lista = Auxiliar.readPersonasCSV(Path.of(csv));
 
-        if(lista == null) return false;
+        if(lista == null) {return false;}
 
         for (Persona persona : lista) {
 
