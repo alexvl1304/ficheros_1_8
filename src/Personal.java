@@ -1,8 +1,6 @@
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.nio.file.Path;
 import java.util.ArrayList;
-import java.util.Scanner;
+
 
 public class Personal {
 
@@ -64,31 +62,15 @@ public class Personal {
 
     public boolean anadirPersonasDesdeCSV(String csv) {
 
-        boolean anadidas = false;
+        ArrayList<Persona> lista = Auxiliar.readPersonasCSV(Path.of(csv));
 
-        try(Scanner sc = new Scanner(new BufferedReader(new FileReader(csv)))) {
+        if(listaPersonas == null) { return false; }
 
-            sc.nextLine();
-            String line = "";
+        for (Persona persona : lista) {
 
-            while (sc.hasNextLine() && !(line = sc.nextLine()).isBlank() ) {
-
-                String[] elementos = line.split(",");
-
-                String firstName = elementos[0];
-                String lastName = elementos[1];
-                String email = elementos[2];
-                String gender = elementos[3];
-                String country = elementos[4];
-
-                listaPersonas.add(new Persona(firstName, lastName, email, gender, country));
-            }
-            anadidas = true;
-
-        }catch(FileNotFoundException e) {
-            e.printStackTrace();
+            listaPersonas.add(persona);
         }
 
-        return anadidas;
+        return true;
     }
 }
