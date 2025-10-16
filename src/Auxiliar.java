@@ -9,6 +9,9 @@ import org.w3c.dom.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
+import com.google.gson.Gson;
+import java.io.FileReader;
+import java.io.FileWriter;
 
 public final class Auxiliar {
 
@@ -199,5 +202,33 @@ public final class Auxiliar {
 
             return null;
         }
+    }
+
+    public static boolean writeJSONPersonas(ArrayList<Persona> personas){
+
+        boolean resultado = false;
+
+        Date d = new Date();
+        String nombreFichero = "personal_" + (1900 + d.getYear()) + "-" + (1 + d.getMonth()) + "-" + d.getDate() + "_" + d.getHours() + "-" + d.getMinutes() + "-" + d.getSeconds() + ".xml";
+
+        try(BufferedReader br = new BufferedReader(new FileReader(nombreFichero))){
+
+            Gson gson = new Gson();
+            Persona persona = gson.fromJson(br, Persona.class);
+
+            System.out.println("Nombre: " + persona.nombre);
+            System.out.println("Edad: " + persona.edad);
+
+            // Escribir JSON
+            persona.edad = 35;
+            FileWriter writer = new FileWriter("salida.json");
+            gson.toJson(persona, writer);
+            writer.close();
+
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        return resultado;
     }
 }
