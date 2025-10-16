@@ -17,13 +17,13 @@ void main() {
     boolean guardado;
     switch (Teclado.introducirInt("¿En que formato desea guardar el fichero?\n1. CSV\n2. XML\n3. JSON", 1, 3)){
 
-        case 1: guardado = Auxiliar.writeCSVPersonas(personal.getListaPersonas());
+        case 1: guardado = Auxiliar.writeCSVPersonas(personal.getListaPersonas()); break;
 
-        case 2: guardado = Auxiliar.writeXMLPersonas(personal.getListaPersonas());
+        case 2: guardado = Auxiliar.writeXMLPersonas(personal.getListaPersonas()); break;
 
-        case 3: //guardado = Auxiliar.writeJSONPersonas(personal.getListaPersonas());
+        case 3: guardado = Auxiliar.writeJSONPersonas(personal.getListaPersonas()); break;
 
-        default: guardado = false;
+        default: guardado = false; break;
     }
 
     if (!guardado) {

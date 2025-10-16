@@ -12,6 +12,8 @@ import javax.xml.transform.stream.StreamResult;
 import com.google.gson.Gson;
 import java.io.FileReader;
 import java.io.FileWriter;
+import com.google.gson.reflect.TypeToken;
+import java.lang.reflect.Type;
 
 public final class Auxiliar {
 
@@ -177,31 +179,24 @@ public final class Auxiliar {
 
         ArrayList<Persona> personas = new ArrayList<>();
 
-        try(Scanner sc = new Scanner(new BufferedReader(new FileReader(path.toString())))) {
+        try(BufferedReader br = new BufferedReader(new FileReader(path.toFile()))) {
 
-            sc.nextLine();
-            String line = "";
+            Gson gson = new Gson();
+            Type listType = new TypeToken<ArrayList<Persona>>(){}.getType();
+            ArrayList<Persona> lista = gson.fromJson(br, listType);
 
-            while (sc.hasNextLine() && !(line = sc.nextLine()).isBlank() ) {
-
-                String[] elementos = line.split(",");
-
-                String firstName = elementos[0];
-                String lastName = elementos[1];
-                String email = elementos[2];
-                String gender = elementos[3];
-                String country = elementos[4];
-
-                personas.add(new Persona(firstName, lastName, email, gender, country));
+            for (Persona p : lista) {
+                personas.add(p);
             }
 
             return personas;
 
-        }catch(FileNotFoundException e) {
-            System.out.println(e.getMessage());
+        }catch(Exception e) {
+            e.printStackTrace();
 
             return null;
         }
+
     }
 
     public static boolean writeJSONPersonas(ArrayList<Persona> personas){
@@ -209,21 +204,15 @@ public final class Auxiliar {
         boolean resultado = false;
 
         Date d = new Date();
-        String nombreFichero = "personal_" + (1900 + d.getYear()) + "-" + (1 + d.getMonth()) + "-" + d.getDate() + "_" + d.getHours() + "-" + d.getMinutes() + "-" + d.getSeconds() + ".xml";
+        String nombreFichero = "personal_" + (1900 + d.getYear()) + "-" + (1 + d.getMonth()) + "-" + d.getDate() + "_" + d.getHours() + "-" + d.getMinutes() + "-" + d.getSeconds() + ".json";
 
-        try(BufferedReader br = new BufferedReader(new FileReader(nombreFichero))){
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(nombreFichero))) {
 
             Gson gson = new Gson();
-            Persona persona = gson.fromJson(br, Persona.class);
 
-            System.out.println("Nombre: " + persona.nombre);
-            System.out.println("Edad: " + persona.edad);
+            gson.toJson(personas, bw);
 
-            // Escribir JSON
-            persona.edad = 35;
-            FileWriter writer = new FileWriter("salida.json");
-            gson.toJson(persona, writer);
-            writer.close();
+            resultado = true;
 
         }catch(Exception e) {
             e.printStackTrace();
