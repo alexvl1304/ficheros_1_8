@@ -57,7 +57,7 @@ public class Personal {
 
         for (Persona persona : listaPersonas) {
 
-            if(persona.country.equals(pais)){
+            if(persona.getCountry().equals(pais)){
                 lista.add(persona);
             }
         }

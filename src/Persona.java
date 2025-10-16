@@ -1,10 +1,10 @@
 public class Persona {
 
-    String firstName;
-    String lastName;
-    String email;
-    String country;
-    String gender;
+    private String firstName;
+    private String lastName;
+    private String email;
+    private String country;
+    private String gender;
 
     Persona(String firstName, String lastName, String email, String gender, String country) {
 
