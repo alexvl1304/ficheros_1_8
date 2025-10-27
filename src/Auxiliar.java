@@ -21,7 +21,7 @@ public final class Auxiliar {
 
     public static ArrayList<Persona> readPersonasCSV(Path path){
 
-        ArrayList<Persona> personas = new ArrayList<>();
+        ArrayList<Persona> listaPersonas = new ArrayList<>();
 
         try(Scanner sc = new Scanner(new BufferedReader(new FileReader(path.toString())))) {
 
@@ -38,10 +38,10 @@ public final class Auxiliar {
                 String gender = elementos[3];
                 String country = elementos[4];
 
-                personas.add(new Persona(firstName, lastName, email, gender, country));
+                listaPersonas.add(new Persona(firstName, lastName, email, gender, country));
             }
 
-            return personas;
+            return listaPersonas;
 
         }catch(FileNotFoundException e) {
             System.out.println(e.getMessage());
